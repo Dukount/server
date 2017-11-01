@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express()
 
-mongoose.connect(`mongodb://localhost/tdd`, err => {
+mongoose.connect(`mongodb://gananggww:qwerty123@cluster0-shard-00-00-rcykk.mongodb.net:27017,cluster0-shard-00-01-rcykk.mongodb.net:27017,cluster0-shard-00-02-rcykk.mongodb.net:27017/dokount?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin`, err => {
   if (err) {
     console.log(err)
   }
