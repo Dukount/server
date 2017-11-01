@@ -8,12 +8,12 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express()
 
-mongoose.connect(`mongodb://localhost/tdd1`, err => {
+mongoose.connect(`mongodb://localhost/${process.env.DB_ENV}`, err => {
   if (err) {
     console.log(err)
   }
   else {
-    console.log(`connected database tdd1`)
+    console.log(`connected database tdd${process.env.DB_ENV}`)
   }
 })
 

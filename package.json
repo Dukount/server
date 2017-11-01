@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www",
-    "test": "mocha"
+    "start": "DB_ENV=dokount node app.js",
+    "dev": "DB_ENV=dev_dokount nodemon app.js",
+    "test": "DB_ENV=tdd_dokount mocha"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
