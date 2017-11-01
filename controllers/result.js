@@ -29,7 +29,19 @@ const fetch = (req, res) => {
   })
 }
 
+const lost = (req, res) => {
+  db.remove({_id: req.params.id})
+  .then(resp => {
+    res.send(resp)
+  })
+  .catch(err => {
+    res.send(err)
+  })
+}
+
+
 module.exports = {
   insert,
-  fetch
+  fetch,
+  lost
 }
