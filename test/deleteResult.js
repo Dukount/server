@@ -56,9 +56,8 @@ describe('Delete one: ', () => {
       chai.request(app)
       .get(`/${testing_delete}`)
       .end((err2, response2) => {
-        console.log('ini finding nf',response2);
-        response2.notFound.should.equal(true)
-        response2.status.should.equal(404)
+        console.log('===============',response2);
+        response2.text.should.equal('')
         done()
       })
 

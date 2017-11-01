@@ -5,5 +5,8 @@ var resultController = require('../controllers/result')
 router.post('/', resultController.insert);
 router.get('/', resultController.fetch);
 router.delete('/:id', resultController.lost);
+router.put('/:id', resultController.update);
+router.get('/:id', resultController.fetchId);
+
 
 module.exports = router;
