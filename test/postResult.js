@@ -95,6 +95,46 @@ describe('Insert Result : ', () => {
       done()
     })
   })
+  it ('Hasil response.body.data.snackCost = "snackCost"', (done) => {
+    chai.request(app)
+    .post('/')
+    .send(result)
+    .end((err, response) => {
+      var respon = JSON.parse(response.text)
+      respon.snackCost.should.equal('snackCost')
+      done()
+    })
+  })
+  it ('Hasil response.body.data.categoryFood = "categoryFood"', (done) => {
+    chai.request(app)
+    .post('/')
+    .send(result)
+    .end((err, response) => {
+      var respon = JSON.parse(response.text)
+      respon.categoryFood.should.equal('categoryFood')
+      done()
+    })
+  })
+  it ('Hasil response.body.data.tripCost = "tripCost"', (done) => {
+    chai.request(app)
+    .post('/')
+    .send(result)
+    .end((err, response) => {
+      var respon = JSON.parse(response.text)
+      respon.tripCost.should.equal('tripCost')
+      done()
+    })
+  })
+  it ('Hasil response.body.data.totalCost = "totalCost"', (done) => {
+    chai.request(app)
+    .post('/')
+    .send(result)
+    .end((err, response) => {
+      var respon = JSON.parse(response.text)
+      respon.totalCost.should.equal('totalCost')
+      done()
+    })
+  })
 
   it ('Hasil response.body.data.author = "author"', (done) => {
     chai.request(app)

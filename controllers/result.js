@@ -19,7 +19,17 @@ const insert = (req, res) => {
     res.send(err)
   })
 }
+const fetch = (req, res) => {
+  db.find()
+  .then(resp => {
+    res.send(resp)
+  })
+  .catch(err => {
+    res.send(err)
+  })
+}
 
 module.exports = {
-  insert
+  insert,
+  fetch
 }
