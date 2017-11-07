@@ -2,27 +2,25 @@ const db = require('../models/user')
 const jwt = require('jsonwebtoken')
 
 const register = (req, res) => {
-  db.find()
+  db.findOne({username: req.body.username})
   .then(respFind => {
-    respFind.map(item => {
-      if (item.username === req.body.username) {
-        res.send('maaf username sudah terdaftar')
-      } else {
-        db.create({
-          name: req.body.name,
-          username: req.body.username,
-          password: req.body.password,
-          email: req.body.email,
-          telp: req.body.telp,
-        })
-        .then(resp => {
-          res.send(resp)
-        })
-        .catch(err => {
-          res.send(err)
-        })
-      }
-    })
+    if (respFind === null) {
+      db.create({
+        name: req.body.name,
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        telp: req.body.telp,
+      })
+      .then(resp => {
+        res.send(resp)
+      })
+      .catch(err => {
+        res.send(err)
+      })
+    } else {
+      res.send('maaf username sudah terdaftar')
+    }
   })
   .catch(err => {
     res.send(err)
