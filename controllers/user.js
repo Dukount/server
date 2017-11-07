@@ -25,7 +25,7 @@ const register = (req, res) => {
     })
   })
   .catch(err => {
-
+    res.send(err)
   })
 }
 
