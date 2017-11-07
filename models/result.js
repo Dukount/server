@@ -4,6 +4,7 @@ const schemaResult = new mongoose.Schema({
   salary: String,
   foodCostTotal: String,
   breakfastCost: String,
+  breakfastType: String,
   lunchType: String,
   lunchCost: String,
   lunchType: String,
