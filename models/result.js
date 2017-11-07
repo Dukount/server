@@ -9,7 +9,10 @@ const schemaResult = new mongoose.Schema({
   categoryFood: String,
   tripCost: String,
   totalCost: String,
-  author: String
+  author: {
+   type: mongoose.Schema.Types.ObjectId,
+   ref: 'User'
+  }
 }, {
   timestamps: true
 })

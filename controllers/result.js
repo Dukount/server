@@ -1,4 +1,7 @@
 const db = require('../models/result')
+const redis = require('redis')
+const client = redis.createClient()
+
 
 const insert = (req, res) => {
   db.create({
@@ -10,10 +13,17 @@ const insert = (req, res) => {
     categoryFood: req.body.categoryFood,
     tripCost: req.body.tripCost,
     totalCost: req.body.totalCost,
-    author: req.body.author
+    author: req.headers.oten._id
   })
   .then(resp => {
-    res.send(resp)
+    resp.populate('author', (err) => {
+      if (err) {
+        res.send(err)
+      } else {
+        console.log('ini populate post',resp);
+        res.send(resp)
+      }
+    })
   })
   .catch(err => {
     res.send(err)
@@ -49,7 +59,7 @@ const update = (req, res) => {
     categoryFood: req.body.categoryFood,
     tripCost: req.body.tripCost,
     totalCost: req.body.totalCost,
-    author: req.body.author
+    author: req.headers.oten.id
   })
   .then(resp => {
     res.send(resp)
@@ -60,12 +70,23 @@ const update = (req, res) => {
 }
 
 const fetchId = (req, res) => {
-  db.findOne({_id: req.params.id})
-  .then(resp => {
-    res.send(resp)
-  })
-  .catch(err => {
-    res.send(err)
+  client.get('alldata', (err, result) => {
+    if (result) {
+      var parseResult = JSON.parse(result)
+      res.send(parseResult)
+    } else {
+      db.findOne({author: req.headers.oten._id})
+      .populate('author')
+      .then(resp => {
+        console.log(resp);
+        var respRedis = JSON.stringify(resp)
+        client.setex('alldata', 60, respRedis)
+        res.send({data: resp})
+      })
+      .catch(err => {
+        res.send({data: err})
+      })
+    }
   })
 }
 
