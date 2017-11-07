@@ -6,13 +6,18 @@ const client = redis.createClient()
 const insert = (req, res) => {
   db.create({
     salary: req.body.salary,
+    foodCostTotal: req.body.foodCostTotal,
     breakfastCost: req.body.breakfastCost,
+    lunchType: req.body.foodCostTotal,
     lunchCost: req.body.lunchCost,
+    lunchType: req.body.lunchType,
     dinnerCost: req.body.dinnerCost,
-    snackCost: req.body.snackCost,
-    categoryFood: req.body.categoryFood,
-    tripCost: req.body.tripCost,
-    totalCost: req.body.totalCost,
+    dinnerType: req.body.dinnerType,
+    transportationTotal: req.body.transportationTotal,
+    transportationType: req.body.transportationType,
+    tripDurationTotal: req.body.tripDuration,
+    salaryLeft: req.body.salaryLeft,
+    salaryToSave: req.body.salaryToSave,
     author: req.headers.oten._id
   })
   .then(resp => {
@@ -20,7 +25,6 @@ const insert = (req, res) => {
       if (err) {
         res.send(err)
       } else {
-        console.log('ini populate post',resp);
         res.send(resp)
       }
     })
@@ -40,7 +44,7 @@ const fetch = (req, res) => {
 }
 
 const lost = (req, res) => {
-  db.remove({_id: req.params.id})
+  db.remove({_id: req.headers.oten._id})
   .then(resp => {
     res.send(resp)
   })
@@ -50,16 +54,21 @@ const lost = (req, res) => {
 }
 
 const update = (req, res) => {
-  db.update({_id: req.params.id}, {
+  db.update({_id: req.headers.oten._id}, {
     salary: req.body.salary,
+    foodCostTotal: req.body.foodCostTotal,
     breakfastCost: req.body.breakfastCost,
+    lunchType: req.body.foodCostTotal,
     lunchCost: req.body.lunchCost,
+    lunchType: req.body.lunchType,
     dinnerCost: req.body.dinnerCost,
-    snackCost: req.body.snackCost,
-    categoryFood: req.body.categoryFood,
-    tripCost: req.body.tripCost,
-    totalCost: req.body.totalCost,
-    author: req.headers.oten.id
+    dinnerType: req.body.dinnerType,
+    transportationTotal: req.body.transportationTotal,
+    transportationType: req.body.transportationType,
+    tripDurationTotal: req.body.tripDuration,
+    salaryLeft: req.body.salaryLeft,
+    salaryToSave: req.body.salaryToSave,
+    author: req.headers.oten._id
   })
   .then(resp => {
     res.send(resp)

@@ -17,8 +17,8 @@ const midty = (req, res, next) => {
 
 router.post('/', midty, resultController.insert);
 router.get('/all', resultController.fetch);
-router.delete('/:id', midty, resultController.lost);
-router.put('/:id', midty, resultController.update);
+router.delete('/', midty, resultController.lost);
+router.put('/', midty, resultController.update);
 router.get('/', midty, resultController.fetchId);
 
 
